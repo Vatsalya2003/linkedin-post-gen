@@ -7,6 +7,7 @@ import ShaderBG from "@/components/ShaderBG";
 import { Button } from "@/components/ui/neon-button";
 import { AnimatedText } from "@/components/ui/animated-underline-text-one";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import ErrorDisplay from "@/components/ErrorDisplay";
 import type { LintResult } from "@/lib/linter";
 
 interface TrendBriefItem {
@@ -36,8 +37,6 @@ export default function Home() {
   const [trendBrief, setTrendBrief] = useState<TrendBriefItem[] | null>(null);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  // Stays true permanently after first successful generation — drives STATE 1 → STATE 2 switch
-  const [hasGenerated, setHasGenerated] = useState(false);
 
   async function generate() {
     setLoading(true);
@@ -54,7 +53,6 @@ export default function Home() {
 
       setTrendBrief(data.trendBrief);
       setPosts(data.posts);
-      setHasGenerated(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -68,7 +66,7 @@ export default function Home() {
 
       <main className="relative z-10 w-full max-w-[95vw] mx-auto px-3 sm:px-6">
 
-        {!hasGenerated && !loading ? (
+        {!posts && !loading && !error ? (
           // ── STATE 1: Hero landing ─────────────────────────────────────────
           <div className="flex flex-col items-center justify-center min-h-[80vh]">
             <AnimatedText
@@ -88,20 +86,18 @@ export default function Home() {
             >
               Generate Posts
             </Button>
-            {error && (
-              <div className="mt-6 bg-red-950 border border-red-800 rounded-lg px-5 py-4 text-sm text-red-400 max-w-md w-full text-center">
-                <span className="font-semibold text-red-300">Error: </span>{error}
-                <span className="ml-2 text-red-500">— Try again.</span>
-              </div>
-            )}
           </div>
 
         ) : loading ? (
           // ── STATE 2: Loading animation ────────────────────────────────────
           <LoadingAnimation />
 
+        ) : error ? (
+          // ── STATE 3: Error display ────────────────────────────────────────
+          <ErrorDisplay message={error} onRetry={() => { setError(null); generate(); }} />
+
         ) : (
-          // ── STATE 2: Results view ─────────────────────────────────────────
+          // ── STATE 4: Results view ─────────────────────────────────────────
           <div className="w-full space-y-6 pb-16">
             {/* Compact top bar */}
             <div className="flex items-center w-full pt-6 pb-8">
@@ -117,14 +113,6 @@ export default function Home() {
                 {loading ? "Generating..." : "Regenerate"}
               </Button>
             </div>
-
-            {/* Error */}
-            {error && (
-              <div className="bg-red-950 border border-red-800 rounded-lg px-5 py-4 text-sm text-red-400">
-                <span className="font-semibold text-red-300">Error: </span>{error}
-                <span className="ml-2 text-red-500">— Try regenerating.</span>
-              </div>
-            )}
 
             {/* Trend brief */}
             {trendBrief && <TrendBrief items={trendBrief} />}

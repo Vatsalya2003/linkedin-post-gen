@@ -60,6 +60,20 @@ export async function POST() {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Unknown error";
     console.error("[generate] Error:", msg);
+
+    const isRateLimit =
+      (err instanceof Error && (err as { status?: number }).status === 429) ||
+      msg.toLowerCase().includes("rate") ||
+      msg.toLowerCase().includes("limit") ||
+      msg.toLowerCase().includes("quota");
+
+    if (isRateLimit) {
+      return NextResponse.json(
+        { error: "API rate limit reached. Credits may be exhausted." },
+        { status: 429 }
+      );
+    }
+
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
