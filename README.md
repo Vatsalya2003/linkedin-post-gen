@@ -142,7 +142,7 @@ Create `.env.local`:
 ```
 ANTHROPIC_API_KEY=your-key-here
 GEMINI_API_KEY=your-key-here
-keep any of ANTHROPIC_API_KEY blank if you want to use Gemini or keep GEMINI_API_KEY blank if you want to use Anthropic
+keep ANTHROPIC_API_KEY blank if you want to use Gemini or keep GEMINI_API_KEY blank if you want to use Anthropic
 ```
 
 Run locally:
