@@ -55,7 +55,7 @@ const PostCard: FC<PostCardProps> = ({ post, lint }) => {
               </span>
             </div>
             <button
-              onClick={handleCopy}
+              onClick={(e) => { e.stopPropagation(); handleCopy(); }}
               className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/15 transition-all duration-300 text-gray-400 hover:text-white"
             >
               {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
@@ -86,7 +86,7 @@ const PostCard: FC<PostCardProps> = ({ post, lint }) => {
           {lint.issues.length > 0 && (
             <div>
               <button
-                onClick={() => setShowLint(!showLint)}
+                onClick={(e) => { e.stopPropagation(); setShowLint(!showLint); }}
                 className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors mx-auto"
               >
                 {lint.issues.length} lint {lint.issues.length === 1 ? "issue" : "issues"}

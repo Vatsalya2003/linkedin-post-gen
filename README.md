@@ -13,9 +13,8 @@ A full-stack AI-powered web app that generates high-quality LinkedIn posts for t
 |:---:|:---:|
 | <img src="./public/screenshots/hero.png" width="400" alt="Landing Page"/> | <img src="./public/screenshots/loading.png" width="400" alt="Loading Animation"/> |
 | **Landing Page** | **AI Generation Pipeline** |
-| <img src="./public/screenshots/posts.png" width="400" alt="Generated Posts"/> width="400" alt="Post Detail"/> |
+| <img src="./public/screenshots/posts.png" width="400" alt="Generated Posts"/> | <img src="./public/screenshots/post-details.png" width="400" alt="Post Detail"/> |
 | **Generated Posts** | **Post Detail with Lint Score** |
-
 </div>
 ---
 

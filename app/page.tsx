@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/neon-button";
 import { AnimatedText } from "@/components/ui/animated-underline-text-one";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import ErrorDisplay from "@/components/ErrorDisplay";
+import PostModal from "@/components/PostModal";
 import type { LintResult } from "@/lib/linter";
 
 interface TrendBriefItem {
@@ -37,6 +38,7 @@ export default function Home() {
   const [trendBrief, setTrendBrief] = useState<TrendBriefItem[] | null>(null);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectedPost, setSelectedPost] = useState<number | null>(null);
 
   async function generate() {
     setLoading(true);
@@ -123,13 +125,17 @@ export default function Home() {
                 {/* Row 1: first 3 cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                   {posts.slice(0, 3).map((post, i) => (
-                    <PostCard key={i} post={post} lint={post.lint} />
+                    <div key={i} onClick={() => setSelectedPost(i)} className="cursor-pointer">
+                      <PostCard post={post} lint={post.lint} />
+                    </div>
                   ))}
                 </div>
                 {/* Row 2: last 2 cards, centered */}
                 <div className="grid grid-cols-1 md:grid-cols-2 md:max-w-[66%] md:mx-auto gap-4 sm:gap-6 w-full">
                   {posts.slice(3, 5).map((post, i) => (
-                    <PostCard key={i} post={post} lint={post.lint} />
+                    <div key={i} onClick={() => setSelectedPost(i + 3)} className="cursor-pointer">
+                      <PostCard post={post} lint={post.lint} />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -138,6 +144,16 @@ export default function Home() {
         )}
 
       </main>
+
+      {/* Post modal */}
+      {selectedPost !== null && posts && (
+        <PostModal
+          isOpen={selectedPost !== null}
+          onClose={() => setSelectedPost(null)}
+          post={posts[selectedPost]}
+          lint={posts[selectedPost].lint}
+        />
+      )}
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-zinc-800 mt-8 px-6 py-6">
