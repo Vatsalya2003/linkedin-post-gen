@@ -133,7 +133,7 @@ or Gemini 2.5-flash API key ([get one here](https://cloud.google.com/generative-
 ### Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/linkedin-post-gen.git
+git clone https://github.com/vatsalya2003/linkedin-post-gen.git
 cd linkedin-post-gen
 npm install
 ```
