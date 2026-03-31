@@ -45,11 +45,11 @@ export default function ErrorDisplay({ message, onRetry }: ErrorDisplayProps) {
           </p>
           <div className="space-y-2 text-sm">
             <p className="text-white font-medium">Vatsalya Dabhi</p>
-            <a href="mailto:dabhi.va@northeastern.edu" className="block text-blue-400 hover:text-blue-300 transition-colors">
-              dabhi.va@northeastern.edu
+            <a href="mailto:vatsalyadabhi05@gmail.com" className="block text-blue-400 hover:text-blue-300 transition-colors">
+              vatsalyadabhi05@gmail.com
             </a>
-            <a href="tel:+16171234567" className="block text-blue-400 hover:text-blue-300 transition-colors">
-              +1 (617) 123-4567
+            <a href="tel:+12065514161" className="block text-blue-400 hover:text-blue-300 transition-colors">
+              +1 (206) 551-4161
             </a>
           </div>
         </div>

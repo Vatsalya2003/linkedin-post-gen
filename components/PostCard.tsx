@@ -30,7 +30,7 @@ const PostCard: FC<PostCardProps> = ({ post, lint }) => {
   const scoreBg = lint.score >= 80 ? "bg-green-500/20 border-green-500/30" : lint.score >= 70 ? "bg-yellow-500/20 border-yellow-500/30" : "bg-red-500/20 border-red-500/30";
 
   return (
-    <div className="group cursor-pointer transform transition-all duration-500 hover:scale-[1.02] hover:-rotate-[0.5deg]">
+    <div className="group cursor-pointer transition-all duration-500">
       <Card className="text-white rounded-2xl border border-white/10 bg-gradient-to-br from-[#010101] via-[#090909] to-[#010101] shadow-2xl relative backdrop-blur-xl overflow-hidden hover:border-white/25 hover:shadow-white/5 hover:shadow-3xl">
 
         {/* Animated background layers */}

@@ -1,6 +1,6 @@
 # LinkedIn Post Generator: Architecture, Prompting & Reflection
 
-## How the System Works
+## System Workflow
 
 The whole thing is a Next.js 14 app on Vercel. You click one button and it runs through four steps behind the scenes.
 
@@ -86,7 +86,7 @@ Browser
 
 ---
 
-## Why I Made These Prompting Choices
+## Prompting Decisions
 
 **Two LLM calls instead of one.**
 I tried doing everything in a single call early on, just give it the raw trends and ask for posts directly. The results were bad. The model would just pick the top-scored trends and write generic posts because it was trying to do two jobs at once. Splitting it into "pick good trends" and then "write good posts" made both steps way better. The brief call is basically cheap filtering; the generation call can focus entirely on writing quality.
@@ -119,7 +119,7 @@ The system prompt has one hard rule: output valid JSON only, no code fences, no 
 
 ---
 
-## What I'd Do With More Time
+## Things I'd do with more time
 
 **Better trend content.** Right now the system only sees article titles and scores. I'd want to actually fetch the first few paragraphs of each linked article before passing to the brief call. A title like "New quantization method" could be groundbreaking or completely irrelevant. You can't really tell without reading a bit of it.
 
@@ -135,7 +135,7 @@ The system prompt has one hard rule: output valid JSON only, no code fences, no 
 
 ---
 
-## How This Scales
+## Scalling Ideas for further development
 
 At 5 posts per click, the synchronous API call works fine. Scaling to 100+ posts per week needs a few changes:
 
